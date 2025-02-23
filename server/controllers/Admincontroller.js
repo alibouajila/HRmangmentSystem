@@ -1,5 +1,6 @@
 // controllers/adminController.js
-
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const Admin = require("../models/Admin"); // Import your Admin model
 
 // Register Admin
@@ -7,11 +8,14 @@ const registerAdmin = async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
-    // Create a new admin (you should hash the password here)
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create a new admin
     const admin = new Admin({
       username,
       email,
-      password,
+      password: hashedPassword,
     });
 
     await admin.save();
@@ -21,19 +25,35 @@ const registerAdmin = async (req, res) => {
   }
 };
 
-// Login Admin (Dummy logic for now, should include password hash check)
 const loginAdmin = async (req, res) => {
   try {
     const { email, password } = req.body;
 
     // Find admin by email
     const admin = await Admin.findOne({ email });
-    if (!admin || admin.password !== password) {
+    if (!admin) {
       return res.status(401).send({ message: "Invalid credentials" });
     }
 
-    // Send a token or other authentication logic here (JWT)
-    res.status(200).send({ message: "Admin logged in successfully" });
+    // Compare hashed password
+    const isMatch = await bcrypt.compare(password, admin.password);
+    if (!isMatch) {
+      return res.status(401).send({ message: "Invalid credentials" });
+    }
+
+    // Check if admin is verified
+    if (!admin.isVerified) {
+      return res.status(403).send({ message: "Admin not verified" });
+    }
+
+    // Generate JWT token
+    const token = jwt.sign(
+      { id: admin._id, email: admin.email },
+      "ali33ali",
+      { expiresIn: "1h" }
+    );
+
+    res.status(200).send({ message: "Admin logged in successfully", token });
   } catch (error) {
     res.status(500).send({ message: "Error logging in", error });
   }
@@ -42,7 +62,7 @@ const loginAdmin = async (req, res) => {
 // Get Admin Status (e.g., whether the admin is verified or not)
 const getAdminStatus = async (req, res) => {
   try {
-    const admin = await Admin.findById(req.adminId); // Assuming adminId is provided by the token
+    const admin = await Admin.findById(req.adminId); 
     if (!admin) {
       return res.status(404).send({ message: "Admin not found" });
     }
