@@ -1,0 +1,38 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    left: 0;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.nav-left {
+    flex: 1;
+}
+
+.nav-left .nav-link, 
+.nav-right .nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    display: inline-block;
+}
+
+.nav-right {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.nav-link:hover {
+    background-color: #555;
+    border-radius: 5px;
+}

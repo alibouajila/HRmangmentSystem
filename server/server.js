@@ -3,10 +3,8 @@ const mongoose = require("mongoose");
 const adminRoutes = require("./routes/Adminroute");
 const departmentRoutes = require("./routes/DepartmentRoute");
 const employeeRoutes = require("./routes/Employee");
-
 // Create an express app
 const app = express();
-
 // Middleware to parse JSON requests
 app.use(express.json());
 

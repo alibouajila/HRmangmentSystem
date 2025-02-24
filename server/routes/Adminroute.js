@@ -1,4 +1,3 @@
-
 const express = require("express");
 const { verifyToken } = require("../middlewares/auth");  // Import middleware for verifying token
 const { registerAdmin, loginAdmin, getAdminStatus } = require("../controllers/Admincontroller");  // Import controllers
