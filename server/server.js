@@ -4,6 +4,7 @@ const adminRoutes = require("./routes/Adminroute");
 const departmentRoutes = require("./routes/DepartmentRoute");
 const employeeRoutes = require("./routes/Employee");
 const cors = require('cors');
+const { verifyToken } =require('./middlewares/auth') ;
 
 // Create an express app
 const app = express();
@@ -21,7 +22,10 @@ mongoose.connect("mongodb://localhost:27017/", {
 app.use("/admin", adminRoutes); // Admin routes
 app.use("/departments", departmentRoutes); // Department routes
 app.use("/employees", employeeRoutes); // Employee routes
+app.get("/verify-token",verifyToken,(req,res)=>{
+  res.status(200).json({ message: 'Token is valid', admin: req.admin });
 
+})
 // Define a basic route
 app.get("/", (req, res) => {
   res.send("Hello, World!");
