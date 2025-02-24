@@ -36,3 +36,13 @@
     background-color: #555;
     border-radius: 5px;
 }
+button.nav-link {
+    background: none;
+    border: none;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  button.nav-link:hover {
+    color: #555; 
+  }

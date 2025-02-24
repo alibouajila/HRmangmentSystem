@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, {useEffect,useState } from 'react';
 import axios from 'axios';
 import './auth.css';
-
+import { useNavigate } from 'react-router-dom';
 function Signup() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -9,6 +9,7 @@ function Signup() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,7 +42,12 @@ function Signup() {
       setLoading(false);
     }
   };
-
+useEffect(()=>{
+    const token = localStorage.getItem('authToken')
+    if(token){
+        navigate('/dashboard')
+    }
+},[navigate])
   return (
     <div className="container">
       <h1>Sign Up</h1>

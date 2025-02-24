@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import "./dashboard.css"
 function Dashboard() {
   const [error, setError] = useState('');
   const [admin, setAdmin] = useState(null);
@@ -35,8 +35,8 @@ function Dashboard() {
     <div className="container">
       {error && <p className="error">{error}</p>}
       {admin ? (
-        <div>
-          <h1>Welcome to the Dashboard, {admin.username}</h1>
+        <div className='welcome-msg'>
+          <h1>Welcome to the Dashboard  {admin.username}</h1>
         </div>
       ) : (
         <p>Loading...</p>
