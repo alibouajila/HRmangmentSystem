@@ -11,10 +11,16 @@ body {
 .container {
   background-color: #ffffff; 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
-  padding: 40px;
+  padding-top: 9px;
+  padding-bottom: 30px;
+  padding-left: 70px;
+  padding-right: 70px;
   border-radius: 10px;
+  min-height: 200px;
   width: 100%;
   max-width: 500px; 
+  margin-top: 190px; 
+  margin-bottom: 70px;
 }
 
 h1 {

@@ -1,0 +1,28 @@
+.home-container {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 18px;
+  }
+  
+  .button-container {
+    margin-top: 20px;
+  }
+  
+  .button {
+    padding: 10px 20px;
+    margin: 7px;
+    font-size: 19px;
+    cursor: pointer;
+    border-radius: 33px;
+    border: none;
+    color: white;
+  }
+  
+  .login-button {
+    background-color: #4c6390;
+  }
+  
+  .signup-button {
+    background-color: #2e3d6d;
+  }
+  

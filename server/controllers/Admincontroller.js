@@ -60,7 +60,7 @@ const loginAdmin = async (req, res) => {
 
     // Check if admin is verified
     if (!admin.isVerified) {
-      return res.status(403).json({ message: "Admin not verified" });
+      return res.status(403).json({ message: "Admin not verified, please contact your supervisor" });
     }
 
     // Generate tokens
